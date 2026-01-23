@@ -8,13 +8,33 @@
 
 <body>
     <script>
-        if (window.opener) {
-            window.opener.postMessage(
-                'authorization:github:success',
-                window.location.origin
-            );
+        (function () {
+            // Get the current URL parameters
+            const params = new URLSearchParams(window.location.search);
+            const code = params.get('code');
+            const state = params.get('state');
+            const error = params.get('error');
+            const errorDescription = params.get('error_description');
+
+            if (error) {
+                // Handle error case
+                if (window.opener) {
+                    window.opener.postMessage(
+                        'authorization:github:error:' + JSON.stringify({ error, error_description: errorDescription }),
+                        window.location.origin
+                    );
+                }
+            } else if (code) {
+                // Success case with PKCE - pass the code back
+                if (window.opener) {
+                    window.opener.postMessage(
+                        'authorization:github:success:' + JSON.stringify({ code, state }),
+                        window.location.origin
+                    );
+                }
+            }
             window.close();
-        }
+        })();
     </script>
 </body>
 
