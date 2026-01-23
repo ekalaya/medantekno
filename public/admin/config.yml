@@ -2,6 +2,7 @@ backend:
   name: github
   repo: ekalaya/medantekno
   branch: main
+  base_url: https://medantekno.com
 
 media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
