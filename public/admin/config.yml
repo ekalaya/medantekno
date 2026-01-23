@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: your-username/your-repo-name # REPLACE THIS with your actual GitHub repo path (e.g. ekalayamanullang/medantekno)
   branch: main
 
 media_folder: "public/images/uploads"
