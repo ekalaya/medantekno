@@ -9,9 +9,15 @@
 
 <body>
   <!-- Use latest stable Decap CMS -->
-  <script>window.CMS_MANUAL_INIT = true;</script>
-  <script src="https://unpkg.com/decap-cms@^3.3.0/dist/decap-cms.js"></script>
   <script>
+    // nuclear option: clear local storage to remove stale config
+    localStorage.removeItem('decap-cms-user');
+    localStorage.removeItem('netlify-cms-user');
+    window.CMS_MANUAL_INIT = true;
+  </script>
+  <script src="https://unpkg.com/decap-cms@3.1.2/dist/decap-cms.js"></script>
+  <script>
+    console.log('Initializing Decap CMS with PKCE...');
     CMS.init({
       config: {
         backend: {
