@@ -3,7 +3,7 @@ backend:
   repo: ekalaya/medantekno
   branch: main
   auth_type: pkce
-  app_id: Ov23li0OHekkQVfEJJXL  # Replace with your GitHub OAuth App Client ID
+  app_id: Ov23li0OHekkQVfEJJXL
 
 media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
