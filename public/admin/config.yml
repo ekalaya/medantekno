@@ -1,7 +1,5 @@
 backend:
-  name: github
-  repo: ekalaya/medantekno
-  branch: main
+  name: local
 
 media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
