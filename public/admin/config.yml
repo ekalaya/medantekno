@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: your-username/your-repo-name # REPLACE THIS with your actual GitHub repo path (e.g. ekalayamanullang/medantekno)
+  repo: ekalaya/medantekno
   branch: main
 
 media_folder: "public/images/uploads"
