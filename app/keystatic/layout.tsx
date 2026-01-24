@@ -1,13 +1,4 @@
-import { Metadata } from 'next';
+import { makeLayout } from '@keystatic/next/ui/app';
+import config from '../../keystatic.config';
 
-export const metadata: Metadata = {
-    title: 'Keystatic Admin',
-};
-
-export default function Layout({ children }: { children: React.ReactNode }) {
-    return (
-        <div>
-            {children}
-        </div>
-    );
-}
+export default makeLayout(config);
