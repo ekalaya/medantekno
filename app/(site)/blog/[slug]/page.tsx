@@ -31,7 +31,7 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
                     <ArrowLeft className="mr-2 h-4 w-4" /> Back to Blog
                 </Link>
 
-                <header className="mb-12">
+                <header className="mb-8">
                     <h1 className="text-4xl md:text-5xl font-bold font-heading mb-4 leading-tight">
                         {post.frontmatter.title}
                     </h1>
@@ -43,6 +43,16 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
                         })}
                     </time>
                 </header>
+
+                {post.frontmatter.thumbnail && (
+                    <div className="mb-12 rounded-2xl overflow-hidden">
+                        <img
+                            src={post.frontmatter.thumbnail}
+                            alt={post.frontmatter.title}
+                            className="w-full h-auto object-cover"
+                        />
+                    </div>
+                )}
 
                 <div className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-heading prose-a:text-blue-600 dark:prose-a:text-blue-400">
                     <MDXRemote source={post.content} />
