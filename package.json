@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "mkdir -p .keystatic-backup && mv app/keystatic .keystatic-backup/ 2>/dev/null || true && mv app/api/keystatic .keystatic-backup/api-keystatic 2>/dev/null || true",
     "build": "next build",
+    "postbuild": "mv .keystatic-backup/keystatic app/ 2>/dev/null || true && mv .keystatic-backup/api-keystatic app/api/keystatic 2>/dev/null || true && rm -rf .keystatic-backup",
     "start": "next start",
     "lint": "eslint"
   },

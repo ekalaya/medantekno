@@ -1,4 +1,11 @@
-import { makePage } from '@keystatic/next/ui/app';
-import config from '../../../keystatic.config';
+import KeystaticClient from './KeystaticClient';
 
-export default makePage(config);
+// For static export (GitHub Pages), Keystatic admin is not available
+// This route is only functional in local development
+export function generateStaticParams() {
+    return [];
+}
+
+export default function Page() {
+    return <KeystaticClient />;
+}
