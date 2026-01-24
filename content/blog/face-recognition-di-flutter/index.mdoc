@@ -21,26 +21,23 @@ dependencies:
   image: ^4.2.0
 ```
 
-\**2. Akses Kamera & Deteksi Wajah (ML Kit)Sv6Kpe[]**Sv6Kpe[]Sv6Kpe[]
+**2. Akses Kamera & Deteksi Wajah (ML Kit)**
 
-- Inisialisasi kamera dan gunakan `CameraControllerSv6Kpe[]`.Sv6Kpe[]Sv6Kpe[]
-- Gunakan `InputImage.fromCameraImageSv6Kpe[]` untuk memproses *streamingSv6Kpe[]* kamera.Sv6Kpe[]Sv6Kpe[]
-- Gunakan `FaceDetectorSv6Kpe[]` untuk mendeteksi wajah dan mendapatkan *bounding boxSv6Kpe[]* (kotak wajah).Sv6Kpe[]Sv6Kpe[]
-- Sv6Kpe[]
+- Inisialisasi kamera dan gunakan `CameraController`.
+- Gunakan `InputImage.fromCameraImage` untuk memproses *streaming* kamera.
+- Gunakan `FaceDetector` untuk mendeteksi wajah dan mendapatkan *bounding box* (kotak wajah).
 
-\**3. Preprocessing & Embedding (TFLite)Sv6Kpe[]**Sv6Kpe[]Sv6Kpe[]
+**3. Preprocessing & Embedding (TFLite)**
 
-- Potong wajah dari gambar hasil kamera sesuai *bounding boxSv6Kpe[]*.Sv6Kpe[]Sv6Kpe[]
-- Ubah ukuran gambar menjadi 112×112112 cross 112112×112Sv6Kpe[] piksel (sesuai standar MobileFaceNet).Sv6Kpe[]Sv6Kpe[]
-- Normalisasi data gambar dan masukkan ke model TFLite (`.tfliteSv6Kpe[]`) untuk menghasilkan *Face VectorSv6Kpe[]* (192 nilai *floatSv6Kpe[]* sebagai *embeddingSv6Kpe[]*).Sv6Kpe[]Sv6Kpe[]
-- Sv6Kpe[]
+- Potong wajah dari gambar hasil kamera sesuai *bounding box.*
+- Ubah ukuran gambar menjadi 112×112112 cross 112112×112piksel (sesuai standar MobileFaceNet).
+- Normalisasi data gambar dan masukkan ke model TFLite (`.tfliteSv6Kpe[]`) untuk menghasilkan *Face Vector*(192 nilai *float* sebagai *embedding*).
 
-\**4. Penyimpanan & Pencocokan Wajah (Face Recognition)Sv6Kpe[]**Sv6Kpe[]Sv6Kpe[]
+**4. Penyimpanan & Pencocokan Wajah (Face Recognition)**
 
-- **Registrasi:Sv6Kpe[]** Simpan *face vectorSv6Kpe[]* hasil ekstraksi ke database lokal (`shared_preferencesSv6Kpe[]` atau *local DBSv6Kpe[]*) dengan nama pengguna.Sv6Kpe[]Sv6Kpe[]
-- **Pengenalan:Sv6Kpe[]** Saat kamera memindai wajah baru, ekstrak *vectorSv6Kpe[]*-nya, lalu hitung jarak (jarak Euclidean) dengan *vectorSv6Kpe[]* yang sudah tersimpan.Sv6Kpe[]Sv6Kpe[]
-- Jika jarak terdekat di bawah ambang batas (misal < 1.0), wajah dianggap cocok (terdeteksi).Sv6Kpe[]Sv6Kpe[]
-- Sv6Kpe[]
+- **Registrasi:** Simpan *face vector* hasil ekstraksi ke database lokal (`shared_preferences` atau *local DB*) dengan nama pengguna.
+- **Pengenalan: S**aat kamera memindai wajah baru, ekstrak *vector-*nya, lalu hitung jarak (jarak Euclidean) dengan *vector* yang sudah tersimpan.
+- Jika jarak terdekat di bawah ambang batas (misal < 1.0), wajah dianggap cocok (terdeteksi).
 
-**5. VisualisasiSv6Kpe[]**\
-Gunakan `CustomPainterSv6Kpe[]` untuk menggambar kotak di sekitar wajah yang terdeteksi di layar *previewSv6Kpe[]* kamera.
+**5. Visualisasi**\
+Gunakan `CustomPainter` untuk menggambar kotak di sekitar wajah yang terdeteksi di layar *preview* kamera.
