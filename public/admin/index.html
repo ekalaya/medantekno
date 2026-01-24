@@ -4,56 +4,13 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Content Manager - Medantekno</title>
+  <!-- Link to the fresh config file -->
+  <link href="./cms.yml" type="text/yaml" rel="cms-config-url" />
 </head>
 
 <body>
-  <script>
-    localStorage.clear();
-    window.CMS_MANUAL_INIT = true;
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/decap-cms@3.1.2/dist/decap-cms.js"></script>
-  <script>
-    alert('DEBUG: Clean Slate JS Init - Stable 3.1.2');
-
-    const cmsConfig = {
-      load_config_file: false,
-      config: {
-        backend: {
-          name: 'github',
-          repo: 'ekalaya/medantekno',
-          branch: 'main',
-          auth_type: 'pkce',
-          app_id: 'Ov23li0OHekkQVfEJJXL',
-        },
-        // Explicitly set these to avoid auto-guessing
-        site_domain: 'medantekno.com',
-        display_url: 'https://medantekno.com',
-
-        media_folder: 'public/images/uploads',
-        public_folder: '/images/uploads',
-        collections: [
-          {
-            name: "blog",
-            label: "Blog",
-            folder: "content/blog",
-            create: true,
-            slug: "{{year}}-{{month}}-{{day}}-{{slug}}",
-            fields: [
-              { label: "Layout", name: "layout", widget: "hidden", default: "blog" },
-              { label: "Title", name: "title", widget: "string" },
-              { label: "Description", name: "description", widget: "text" },
-              { label: "Publish Date", name: "date", widget: "datetime" },
-              { label: "Featured Image", name: "thumbnail", widget: "image", required: false },
-              { label: "Body", name: "body", widget: "markdown" }
-            ]
-          }
-        ]
-      }
-    };
-
-    console.log('Initializing CMS with Config:', cmsConfig);
-    CMS.init(cmsConfig);
-  </script>
+  <!-- Use standard Decap CMS 3.3.3 -->
+  <script src="https://unpkg.com/decap-cms@^3.3.3/dist/decap-cms.js"></script>
 </body>
 
 </html>
