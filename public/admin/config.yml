@@ -1,4 +1,0 @@
-# specific config ignored, controlled by index.html manual init
-backend:
-  name: github
-  repo: ekalaya/medantekno

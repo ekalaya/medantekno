@@ -13,14 +13,14 @@
     localStorage.clear();
     window.CMS_MANUAL_INIT = true;
   </script>
-  <!-- Try Beta version for better PKCE support -->
-  <script src="https://unpkg.com/decap-cms@beta/dist/decap-cms.js"></script>
+  <!-- Use Stable Version 3.1.2 -->
+  <script src="https://unpkg.com/decap-cms@3.1.2/dist/decap-cms.js"></script>
   <script>
     // DEBUG: Confirm new code is running
-    alert('DEBUG: BETA Version Loaded! Check Console for Config.');
+    alert('DEBUG: STABLE Version 3.1.2 Loaded!');
 
     const cmsConfig = {
-      load_config_file: false, // Critical: Don't look for config.yml
+      load_config_file: false,
       config: {
         backend: {
           name: 'github',
@@ -28,7 +28,6 @@
           branch: 'main',
           auth_type: 'pkce',
           app_id: 'Ov23li0OHekkQVfEJJXL',
-          base_url: 'https://medantekno.com', // FORCE local auth
         },
         media_folder: 'public/images/uploads',
         public_folder: '/images/uploads',
