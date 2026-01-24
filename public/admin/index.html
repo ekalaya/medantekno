@@ -5,13 +5,55 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Content Manager - Medantekno</title>
-  <!-- Force config reload with new query param -->
-  <link href="./config.yml?v=base_url_fix" type="text/yaml" rel="cms-config-url" />
 </head>
 
 <body>
-  <!-- Use latest stable Decap CMS -->
-  <script src="https://unpkg.com/decap-cms@^3.1.2/dist/decap-cms.js"></script>
+  <script>
+    // Force clear config
+    localStorage.clear();
+    window.CMS_MANUAL_INIT = true;
+  </script>
+  <!-- Try Beta version for better PKCE support -->
+  <script src="https://unpkg.com/decap-cms@beta/dist/decap-cms.js"></script>
+  <script>
+    // DEBUG: Confirm new code is running
+    alert('DEBUG: BETA Version Loaded! Check Console for Config.');
+
+    const cmsConfig = {
+      load_config_file: false, // Critical: Don't look for config.yml
+      config: {
+        backend: {
+          name: 'github',
+          repo: 'ekalaya/medantekno',
+          branch: 'main',
+          auth_type: 'pkce',
+          app_id: 'Ov23li0OHekkQVfEJJXL',
+        },
+        media_folder: 'public/images/uploads',
+        public_folder: '/images/uploads',
+        collections: [
+          {
+            name: "blog",
+            label: "Blog",
+            folder: "content/blog",
+            create: true,
+            slug: "{{year}}-{{month}}-{{day}}-{{slug}}",
+            fields: [
+              { label: "Layout", name: "layout", widget: "hidden", default: "blog" },
+              { label: "Title", name: "title", widget: "string" },
+              { label: "Description", name: "description", widget: "text" },
+              { label: "Publish Date", name: "date", widget: "datetime" },
+              { label: "Featured Image", name: "thumbnail", widget: "image", required: false },
+              { label: "Body", name: "body", widget: "markdown" }
+            ]
+          }
+        ]
+      }
+    };
+
+    console.log('Initializing CMS with Config:', cmsConfig);
+    CMS.init(cmsConfig);
+  </script>
 </body>
 
 </html>
