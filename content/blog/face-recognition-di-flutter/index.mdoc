@@ -1,0 +1,46 @@
+---
+title: "Face Recognition\_di Flutter"
+description: "Membuat\_face recognition\_di Flutter melibatkan deteksi wajah (menggunakan Google ML Kit) dan pencocokan fitur wajah (menggunakan TensorFlow Lite) untuk membandingkan wajah baru dengan data tersimpan. Langkah utamanya meliputi: penggunaan kamera (camera\_package), deteksi wajah (google_mlkit_face_detection), ekstraksi fitur (embedding) dengan model TFLite (tflite_flutter), dan perbandingan vektor wajah.\_"
+date: 2026-01-24
+thumbnail: /images/uploads/face-recognition-di-flutter/thumbnail.png
+---
+Membuat&nbsp;*face recognition*&nbsp;di Flutter melibatkan deteksi wajah (menggunakan Google ML Kit) dan pencocokan fitur wajah (menggunakan TensorFlow Lite) untuk membandingkan wajah baru dengan data tersimpan. Langkah utamanya meliputi: penggunaan kamera (`camera`&nbsp;package), deteksi wajah (`google_mlkit_face_detection`), ekstraksi fitur (embedding) dengan model TFLite (`tflite_flutter`), dan perbandingan vektor wajah.&nbsp;
+
+**Tutorial Langkah demi Langkah Face Recognition Flutter**
+
+1. **Persiapan Proyek & Dependencies**\
+   Tambahkan paket berikut di&nbsp;`pubspec.yaml`&nbsp;untuk mengakses kamera, deteksi wajah, dan memproses gambar:
+
+```
+dependencies:
+  flutter:
+    sdk: flutter
+  camera: ^0.11.0+2
+  google_mlkit_face_detection: ^0.11.0
+  tflite_flutter: ^0.10.0
+  image: ^4.2.0
+```
+
+\**2. Akses Kamera & Deteksi Wajah (ML Kit)Sv6Kpe[]**Sv6Kpe[]Sv6Kpe[]
+
+- Inisialisasi kamera dan gunakan `CameraControllerSv6Kpe[]`.Sv6Kpe[]Sv6Kpe[]
+- Gunakan `InputImage.fromCameraImageSv6Kpe[]` untuk memproses *streamingSv6Kpe[]* kamera.Sv6Kpe[]Sv6Kpe[]
+- Gunakan `FaceDetectorSv6Kpe[]` untuk mendeteksi wajah dan mendapatkan *bounding boxSv6Kpe[]* (kotak wajah).Sv6Kpe[]Sv6Kpe[]
+- Sv6Kpe[]
+
+\**3. Preprocessing & Embedding (TFLite)Sv6Kpe[]**Sv6Kpe[]Sv6Kpe[]
+
+- Potong wajah dari gambar hasil kamera sesuai *bounding boxSv6Kpe[]*.Sv6Kpe[]Sv6Kpe[]
+- Ubah ukuran gambar menjadi 112×112112 cross 112112×112Sv6Kpe[] piksel (sesuai standar MobileFaceNet).Sv6Kpe[]Sv6Kpe[]
+- Normalisasi data gambar dan masukkan ke model TFLite (`.tfliteSv6Kpe[]`) untuk menghasilkan *Face VectorSv6Kpe[]* (192 nilai *floatSv6Kpe[]* sebagai *embeddingSv6Kpe[]*).Sv6Kpe[]Sv6Kpe[]
+- Sv6Kpe[]
+
+\**4. Penyimpanan & Pencocokan Wajah (Face Recognition)Sv6Kpe[]**Sv6Kpe[]Sv6Kpe[]
+
+- **Registrasi:Sv6Kpe[]** Simpan *face vectorSv6Kpe[]* hasil ekstraksi ke database lokal (`shared_preferencesSv6Kpe[]` atau *local DBSv6Kpe[]*) dengan nama pengguna.Sv6Kpe[]Sv6Kpe[]
+- **Pengenalan:Sv6Kpe[]** Saat kamera memindai wajah baru, ekstrak *vectorSv6Kpe[]*-nya, lalu hitung jarak (jarak Euclidean) dengan *vectorSv6Kpe[]* yang sudah tersimpan.Sv6Kpe[]Sv6Kpe[]
+- Jika jarak terdekat di bawah ambang batas (misal < 1.0), wajah dianggap cocok (terdeteksi).Sv6Kpe[]Sv6Kpe[]
+- Sv6Kpe[]
+
+**5. VisualisasiSv6Kpe[]**\
+Gunakan `CustomPainterSv6Kpe[]` untuk menggambar kotak di sekitar wajah yang terdeteksi di layar *previewSv6Kpe[]* kamera.

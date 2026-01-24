@@ -1,14 +1,10 @@
-import { Metadata } from 'next';
-
-export const metadata: Metadata = {
-    title: 'Keystatic Admin',
-};
-
 export default function Layout({ children }: { children: React.ReactNode }) {
     return (
-        <html lang="en">
+        <html>
             <head />
-            <body>{children}</body>
+            <body>
+                {children}
+            </body>
         </html>
     );
 }
