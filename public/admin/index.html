@@ -13,10 +13,14 @@
     localStorage.clear();
     window.CMS_MANUAL_INIT = true;
   </script>
-  <script src="https://unpkg.com/decap-cms@^3.1.2/dist/decap-cms.js"></script>
+  <script src="https://unpkg.com/decap-cms@^3.3.3/dist/decap-cms.js"></script>
   <script>
+    // DEBUG: Confirm new code is running
+    alert('DEBUG: New CMS Code Loaded! Version 3.3.3');
+
     console.log('Starting CMS with JS Config...');
     CMS.init({
+      load_config_file: false, // Critical: Don't look for config.yml
       config: {
         backend: {
           name: 'github',
