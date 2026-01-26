@@ -6,7 +6,6 @@ import React from 'react';
 // Custom React components for rendering Markdoc nodes with proper styling
 const components = {
     Heading: ({ level, children }: { level: number; children: React.ReactNode }) => {
-        const Tag = `h${level}` as keyof JSX.IntrinsicElements;
         const styles: Record<number, string> = {
             1: 'text-3xl font-bold mt-8 mb-4',
             2: 'text-2xl font-bold mt-6 mb-3',
@@ -15,7 +14,17 @@ const components = {
             5: 'text-base font-semibold mt-3 mb-1',
             6: 'text-sm font-semibold mt-3 mb-1',
         };
-        return <Tag className={styles[level] || styles[2]}>{children}</Tag>;
+        const className = styles[level] || styles[2];
+
+        switch (level) {
+            case 1: return <h1 className={className}>{children}</h1>;
+            case 2: return <h2 className={className}>{children}</h2>;
+            case 3: return <h3 className={className}>{children}</h3>;
+            case 4: return <h4 className={className}>{children}</h4>;
+            case 5: return <h5 className={className}>{children}</h5>;
+            case 6: return <h6 className={className}>{children}</h6>;
+            default: return <h2 className={className}>{children}</h2>;
+        }
     },
     Paragraph: ({ children }: { children: React.ReactNode }) => (
         <p className="mb-4 leading-relaxed">{children}</p>
