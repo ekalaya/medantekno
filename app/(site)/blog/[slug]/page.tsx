@@ -2,6 +2,7 @@ import { getPostData, getAllPostSlugs } from "@/lib/posts";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import MarkdocRenderer from "@/components/MarkdocRenderer";
 
 export async function generateStaticParams() {
     const paths = getAllPostSlugs();
@@ -55,9 +56,14 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
                 )}
 
                 <div className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-heading prose-a:text-blue-600 dark:prose-a:text-blue-400">
-                    <MDXRemote source={post.content} />
+                    {post.format === 'mdoc' ? (
+                        <MarkdocRenderer content={post.content} />
+                    ) : (
+                        <MDXRemote source={post.content} />
+                    )}
                 </div>
             </div>
         </article>
     );
 }
+

@@ -14,7 +14,7 @@ export default function Hero() {
             </div>
 
             {/* Content */}
-            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
+            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center w-full -mt-24">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -37,7 +37,7 @@ export default function Hero() {
 
             {/* Scroll indicator */}
             <motion.div
-                className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+                className="absolute bottom-25 left-1/2 transform -translate-x-1/2"
                 animate={{ y: [0, 10, 0] }}
                 transition={{ repeat: Infinity, duration: 2 }}
             >

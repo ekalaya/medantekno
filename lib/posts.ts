@@ -14,6 +14,7 @@ export type Post = {
         layout?: string;
     };
     content: string;
+    format: 'mdoc' | 'mdx';
 };
 
 /**
@@ -27,6 +28,7 @@ function getPostFromPath(slug: string, entryPath: string): Post | null {
 
     let fileContents: string;
     let actualSlug: string;
+    let format: 'mdoc' | 'mdx' = 'mdx';
 
     if (stat.isDirectory()) {
         // Keystatic format: folder with index.mdoc
@@ -36,10 +38,12 @@ function getPostFromPath(slug: string, entryPath: string): Post | null {
         }
         fileContents = fs.readFileSync(mdocPath, 'utf8');
         actualSlug = entryPath; // folder name is the slug
+        format = 'mdoc';
     } else if (entryPath.endsWith('.mdx')) {
         // Traditional MDX format
         fileContents = fs.readFileSync(fullPath, 'utf8');
         actualSlug = entryPath.replace(/\.mdx$/, '');
+        format = 'mdx';
     } else {
         // Skip non-content files
         return null;
@@ -51,6 +55,7 @@ function getPostFromPath(slug: string, entryPath: string): Post | null {
         slug: actualSlug,
         frontmatter: data as Post['frontmatter'],
         content,
+        format,
     };
 }
 
@@ -109,13 +114,16 @@ export function getPostData(slug: string): Post {
     const mdxPath = path.join(postsDirectory, `${slug}.mdx`);
 
     let fileContents: string;
+    let format: 'mdoc' | 'mdx' = 'mdx';
 
     // Try Keystatic folder format first
     if (fs.existsSync(folderPath)) {
         fileContents = fs.readFileSync(folderPath, 'utf8');
+        format = 'mdoc';
     } else if (fs.existsSync(mdxPath)) {
         // Fall back to MDX format
         fileContents = fs.readFileSync(mdxPath, 'utf8');
+        format = 'mdx';
     } else {
         throw new Error(`Post not found: ${slug}`);
     }
@@ -126,5 +134,6 @@ export function getPostData(slug: string): Post {
         slug,
         frontmatter: data as Post['frontmatter'],
         content,
+        format,
     };
 }
